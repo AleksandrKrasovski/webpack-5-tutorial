@@ -10,6 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].bundle.js',
+    // assetModuleFilename: 'images/[hash:8][ext][query]',
   },
 
   plugins: [
@@ -29,6 +30,17 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
+      },
+      {
+        test: /\.(?:iso|gif|png|jpg|jpeg)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[hash:8][ext][query]'
+        }
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        type: 'asset/inline'
       },
     ]
   },
