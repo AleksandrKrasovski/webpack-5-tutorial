@@ -133,6 +133,19 @@ npm list -g
     ```
   * `npm uninstall clean-webpack-plugin`
   * 🍏 `npm list`
+* webpack.config.output.`clean` `true`
+  * AI: В Webpack 5 встроена функция очистки выходной директории без дополнительных плагинов. Достаточно добавить в конфигурацию:
+    ```js
+    javascript
+    module.exports = {
+      //...,
+      output: {
+        //...,
+        clean: true, // Очищает output.path перед сборкой
+      },
+      //...
+    };
+    ```
 ## `Babel` installation
 * add a `Game class` in `index.js`
 * 🔴 `npm run build`
