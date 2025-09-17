@@ -43,6 +43,29 @@ module.exports = {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
         type: 'asset/inline'
       },
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          'style-loader', 
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    {
+                      // options
+                    }
+                  ],
+                ]
+              }
+            }
+          }, 
+          'sass-loader'
+        ],
+      },
     ]
   },
 }

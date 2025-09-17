@@ -111,7 +111,7 @@ npm list -g
   };
   ```
 * 🍏 `npm run build`
-## `Clean` `Webpack` plugin
+## `Clean` `Webpack` plugin & `output.clean` proprety
 * needs for cleaning of `dist` folder before `npm run build`
   * NOTE: although `npm run build` command automaticly replaces files in the `dist` folder
 * 🔴 `npm i clean-webpack-plugin@4.0.0`
@@ -434,4 +434,102 @@ npm list -g
   ```
   * 🍏 `npm run build`
   * 🍏 `dist % http-server`
-## 
+## `Styles` loaders for `dev` mode
+* NOTE: all these plugins are `third-party` packages
+  * `not` maintained by `webpack`
+  * `no` support, `no` security policy, `no` license as `webpack`
+* add `module.rules` about loaders (`style`, `css`, `postcs`, `sass`) in `webpack.config.js`
+  ```js
+  module: {
+    rules: [
+      //...,
+      {
+        test: /\.(scss|css)$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+      },
+    ]
+  }
+  ```
+* `sass`-loader - load `SCSS` and compile to `CSS`
+  * `https://webpack.js.org/loaders/sass-loader/`
+  * `npm install sass-loader@10.1.1 sass@1.32.8 --save-dev`
+    * `https://www.npmjs.com/package/sass?activeTab=versions`
+    * `https://www.npmjs.com/package/sass-loader?activeTab=versions`
+* `deprecated`! `node`-sass - `C++` version of `Sass`
+  * `archived` by the owner on Jul 25, 2024 and reached `end of life`.
+  * `https://github.com/sass/node-sass`
+* `postcss`-loader - Process CSS with PostCSS
+  * `https://webpack.js.org/loaders/postcss-loader/`
+  * `npm install --save-dev postcss-loader@5.2.0 postcss@7.0.35`
+    * `https://www.npmjs.com/package/postcss-loader?activeTab=versions`
+    * `https://www.npmjs.com/package/postcss?activeTab=versions`
+  * change `module.rules` with  `postcs-css` loader in `webpack.config.js`
+    ```js
+    module: {
+      rules: [
+        //...,
+        {
+          test: /\.(scss|css)$/,
+          use: [
+            'style-loader',
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                postcssOptions: {
+                  plugins: [
+                    [
+                      'postcss-preset-env',
+                      {
+                        // options
+                      }
+                    ],
+                  ]
+                }
+              }
+            },
+            'sass-loader'],
+        },
+      ]
+    }
+    ```
+* `postcss-preset-env` - convert `modern CSS` into something `old browsers` can understand
+  * `npm i postcss-preset-env@6.7.0`
+    * `https://www.npmjs.com/package/postcss-preset-env?activeTab=versions`
+* `css`-loader - Resolve CSS imports
+  * `https://webpack.js.org/loaders/css-loader/`
+    * have not see its options
+      * `url` and `imag-set` functions
+      * `@import`
+      * css `modules`
+      * `type sourceMap = boolean`
+      * `type importLoaders = number` enables/disables/sets modes:
+        * 0 => `no loaders`; // default
+        * 1 => `postcss-loader`; // for example
+        * 2 => `postcss-loader`, `sass-loader` // for example
+      * `type esModule = boolean` for `esModule` syntax
+      * `type exportType = "array" | "string" | "css-style-sheet"`
+  * `npm install --save-dev css-loader@4.3.0`
+    * `https://www.npmjs.com/package/css-loader?activeTab=versions`
+* `style`-loader - Inject CSS into the DOM
+  * `https://webpack.js.org/loaders/style-loader/`
+    * have not see its options
+      * `type injectType = | "styleTag" | "singletonStyleTag" | "autoStyleTag" | "lazyStyleTag" | "lazySingletonStyleTag" | "lazyAutoStyleTag" | "linkTag"`
+      * `type attributes = HTMLAttributes` sets `loader.attributes`
+      * `type insert = string` inserts any `tag`
+      * `type styleTagTransform = string` setups an `absolute path` to a custom `function`
+      * base (`do not understood`)
+      * `type esModule = boolean` for `esModule` syntax
+  * `npm install --save-dev style-loader@2.0.0`
+    * `https://www.npmjs.com/package/style-loader?activeTab=versions`
+* 🍏 `npm run build`
+  * dist/`main.bundle.js` includes the css `styles`
+* 🍏 `dist % http-server`
+  * `http://127.0.0.1:8080` has CSS styles
+## `Styles` loaders for `prod` mode
+* use all loders for `dev` mode exept `style-loader`
+* use `MiniCssExtractPlugin` instead of `style-loader`
+  * this plugin will export the CSS as a `minified` file
+  * look how `MiniCssExtractPlugin` works
+    * `https://github.com/taniarascia/webpack-boilerplate`
+##
