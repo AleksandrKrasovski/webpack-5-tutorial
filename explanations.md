@@ -1,5 +1,4 @@
 # Main commands and actions
-
 ## Sources
 * `https://habr.com/ru/articles/524260/`
 * `https://www.taniarascia.com/how-to-use-webpack/`
@@ -532,4 +531,35 @@ npm list -g
   * this plugin will export the CSS as a `minified` file
   * look how `MiniCssExtractPlugin` works
     * `https://github.com/taniarascia/webpack-boilerplate`
-##
+## 🔴 `Webpack Dev Server` for `dev` mode ONLY
+* `https://www.npmjs.com/package/webpack-dev-server`
+* 🔴 `npm install webpack-dev-server@3.11.0 --save-dev`
+  * `https://www.npmjs.com/package/webpack-dev-server?activeTab=versions`
+  * get a lot of unsupported engine
+    ```bash
+    npm WARN EBADENGINE   required: { node: '20 || >=22' },
+    npm WARN EBADENGINE   current:  { node: 'v17.4.0', npm: '8.5.1' }
+    ```
+  * `npm uninstall webpack-dev-server`
+  * `npm cache clean --force`
+  * `npm cache verify`
+* 🔴 `npm install webpack-dev-server@3.9.0 --save-dev`
+  * get error
+    ```bash
+    npm ERR! peer webpack@"^4.0.0" from webpack-dev-server@3.9.0
+    ```
+  * `npm uninstall webpack-dev-server`
+  * `npm cache clean --force`
+  * `npm cache verify`
+* 🔴 `npm install webpack-dev-server@3.10.3 --save-dev`
+  * get a lot of unsupported engine like `webpack-dev-server@3.11.0`
+    ```bash
+    npm WARN EBADENGINE   required: { node: '20 || >=22' },
+    npm WARN EBADENGINE   current:  { node: 'v17.4.0', npm: '8.5.1' }
+    ```
+  * `npm uninstall webpack-dev-server`
+  * `npm cache clean --force`
+  * `npm cache verify`
+* 🍏 `npm run build`
+* 🍏 `dist % http-server`
+# The End
